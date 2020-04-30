@@ -70,7 +70,7 @@ class AtomFormat extends FormatAbstract{
 			$entryAuthor = $this->xml_encode($item->getAuthor());
 			$entryTitle = $this->xml_encode($entryTitle);
 			$entryUri = $this->xml_encode($entryUri);
-			$entryTimestamp = $this->xml_encode(gmdate(DATE_ATOM, $entryTimestamp));
+			$entryTimestamp = $this->xml_encode(gmdate(DATE_RSS, $entryTimestamp));
 			$entryContent = $this->xml_encode($this->sanitizeHtml($entryContent));
 
 			$entryEnclosures = '';
@@ -124,7 +124,7 @@ class AtomFormat extends FormatAbstract{
 EOD;
 		}
 
-		$feedTimestamp = gmdate(DATE_ATOM, $this->lastModified);
+		$feedTimestamp = gmdate(DATE_RSS, $this->lastModified);
 		$charset = $this->getCharset();
 
 		/* Data are prepared, now let's begin the "MAGIE !!!" */
