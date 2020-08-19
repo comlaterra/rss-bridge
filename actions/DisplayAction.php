@@ -164,18 +164,21 @@ class DisplayAction extends ActionAbstract {
 
 						// Error 0 is a special case (i.e. "trying to get property of non-object")
 						if($e->getCode() === 0) {
+							error_log('Bridge encountered an unexpected situation! ('
+							. $this->userData['_error_time']
+							. ')');
 							$item->setTitle(
-								'Bridge encountered an unexpected situation! ('
-								. $this->userData['_error_time']
-								. ')'
+								'We are having trouble to load your content! We\'ll be back soon!'
 							);
 						} else {
-							$item->setTitle(
+							error_log(
 								'Bridge returned error '
 								. $e->getCode()
 								. '! ('
 								. $this->userData['_error_time']
-								. ')'
+								. ')');
+							$item->setTitle(
+								'We are having trouble to load your content! We\'ll be back soon!'
 							);
 						}
 
@@ -185,7 +188,7 @@ class DisplayAction extends ActionAbstract {
 							. http_build_query($this->userData)
 						);
 
-						$item->setTimestamp(time());
+						$item->setTimestamp(time() - 18000);
 						$item->setContent(buildBridgeException($e, $bridge));
 
 						$items[] = $item;
@@ -210,14 +213,17 @@ class DisplayAction extends ActionAbstract {
 							. http_build_query($this->userData)
 						);
 
-						$item->setTitle(
+						error_log(
 							'Bridge returned error '
 							. $e->getCode()
 							. '! ('
 							. $this->userData['_error_time']
-							. ')'
+							. ')');
+
+						$item->setTitle(
+							'We are having trouble to load your content! We\'ll be back soon!'
 						);
-						$item->setTimestamp(time());
+						$item->setTimestamp(time() - 18000);
 						$item->setContent(buildBridgeException($e, $bridge));
 
 						$items[] = $item;
