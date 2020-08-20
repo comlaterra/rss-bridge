@@ -243,3 +243,6 @@ config.ini.php
 
 #Crawler
 robots.txt
+
+# Data
+mysql/*
